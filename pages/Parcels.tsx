@@ -10,21 +10,21 @@ import { X, ZoomIn, MapPin, Image as ImageIcon } from 'lucide-react';
  * Estas coordenadas se mantienen fijas porque dependen de la imagen del mapa.
  */
 const lotCoordinates = [
-  { top: 40, left: 50 }, // Lote 1 (Centro)
-  { top: 55, left: 35 }, // Lote 2
-  { top: 30, left: 45 }, // Lote 3
-  { top: 65, left: 45 }, // Lote 4
-  { top: 45, left: 65 }, // Lote 5
-  { top: 25, left: 60 }, // Lote 6
-  { top: 75, left: 30 }, // Lote 7
-  { top: 20, left: 30 }, // Lote 8
-  { top: 50, left: 80 }, // Lote 9
-  { top: 80, left: 60 }, // Lote 10
-  { top: 15, left: 75 }, // Lote 11
-  { top: 35, left: 20 }, // Lote 12
-  { top: 60, left: 15 }, // Lote 13
-  { top: 85, left: 45 }, // Lote 14
-  { top: 10, left: 50 }, // Lote 15
+  { top: 40, left: 56 }, // Lote 1 (Centro-Derecha, marcado en mapa)
+  { top: 53, left: 35 }, // Lote 2 (Centro-Izquierda, marcado en mapa)
+  { top: 33, left: 42 }, // Lote 3 (Arriba-Centro, marcado en mapa)
+  { top: 63, left: 46 }, // Lote 4 (Abajo-Centro, marcado en mapa)
+  { top: 18, left: 64 }, // Lote 5 (Sector Nororiental superior)
+  { top: 15, left: 80 }, // Lote 6 (Extremo Nororiental)
+  { top: 35, left: 75 }, // Lote 7 (Sector Oriental medio)
+  { top: 45, left: 85 }, // Lote 8 (Borde Oriental)
+  { top: 55, left: 65 }, // Lote 9 (Sector Suroriental interior)
+  { top: 65, left: 80 }, // Lote 10 (Sector Suroriental medio)
+  { top: 80, left: 75 }, // Lote 11 (Extremo Suroriental)
+  { top: 75, left: 35 }, // Lote 12 (Sector Suroccidental)
+  { top: 85, left: 50 }, // Lote 13 (Borde Sur)
+  { top: 28, left: 25 }, // Lote 14 (Corredor Occidental - "Cuello")
+  { top: 18, left: 10 }, // Lote 15 (Extremo Occidental - "Cabeza")
 ];
 
 const Lotes: React.FC = () => {
