@@ -32,7 +32,7 @@ const Lotes: React.FC = () => {
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
   
   // Lógica de carga de imágenes en cascada
-  const [imgSrc, setImgSrc] = useState('/plano-topografico.jpg');
+  const [imgSrc, setImgSrc] = useState('/Actual Map.jpg');
   const [loadStep, setLoadStep] = useState(0);
 
   const handleImageError = () => {
