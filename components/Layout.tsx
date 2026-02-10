@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { Menu, X, TreePine } from 'lucide-react';
+import { Menu, X, TreePine, Lock } from 'lucide-react';
 
 const Layout: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -34,7 +34,7 @@ const Layout: React.FC = () => {
             </Link>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
@@ -46,6 +46,15 @@ const Layout: React.FC = () => {
                   {link.name}
                 </Link>
               ))}
+              <div className="border-l border-stone-200 pl-8 ml-4">
+                 <Link 
+                  to="/login" 
+                  className="text-stone-400 hover:text-forest-600 transition-colors"
+                  aria-label="Admin Login"
+                >
+                   <Lock className="h-4 w-4" />
+                 </Link>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -81,6 +90,16 @@ const Layout: React.FC = () => {
                 {link.name}
               </Link>
             ))}
+            <div className="pt-4 mt-4 border-t border-stone-100">
+               <Link
+                to="/login"
+                onClick={closeMenu}
+                className="flex items-center px-3 py-3 rounded-md text-base font-medium text-stone-500 hover:bg-stone-50 hover:text-stone-900"
+              >
+                <Lock className="h-4 w-4 mr-2" />
+                Acceso Admin
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
@@ -130,8 +149,11 @@ const Layout: React.FC = () => {
               </ul>
             </div>
           </div>
-          <div className="border-t border-stone-800 mt-12 pt-8 text-center text-xs text-stone-500">
+          <div className="border-t border-stone-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-stone-500">
             <p>&copy; {new Date().getFullYear()} Lotes El Retiro. Todos los derechos reservados.</p>
+            <Link to="/login" className="mt-2 md:mt-0 text-stone-600 hover:text-stone-400 transition-colors flex items-center gap-1">
+              <Lock className="w-3 h-3" /> Acceso Administrativo
+            </Link>
           </div>
         </div>
       </footer>

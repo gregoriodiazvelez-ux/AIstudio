@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Lot, LotStatus } from '../types';
+import { useLots } from '../context/LotContext';
 import { X, ZoomIn, MapPin, Image as ImageIcon } from 'lucide-react';
 
 /**
  * ==========================================
  * CONFIGURACIÓN DE COORDENADAS
  * ==========================================
- * Pega aquí tus coordenadas cuando las tengas.
- * Formato: { top: porcentaje_vertical, left: porcentaje_horizontal }
+ * Estas coordenadas se mantienen fijas porque dependen de la imagen del mapa.
  */
 const lotCoordinates = [
   { top: 40, left: 50 }, // Lote 1 (Centro)
@@ -27,43 +27,19 @@ const lotCoordinates = [
   { top: 10, left: 50 }, // Lote 15
 ];
 
-// Generador de Datos de Prueba
-const generateLots = (): Lot[] => {
-  return Array.from({ length: 15 }, (_, i) => {
-    const id = i + 1;
-    let status = LotStatus.AVAILABLE;
-    if ([2, 5, 8, 12].includes(id)) status = LotStatus.SOLD;
-    if ([3, 7, 14].includes(id)) status = LotStatus.RESERVED;
-
-    return {
-      id,
-      size: `${2000 + (id * 50)} m²`,
-      price: status === LotStatus.SOLD ? 'Vendido' : `$${350 + (id * 10)} Millones COP`,
-      status,
-      description: `El Lote ${id} cuenta con una ubicación privilegiada en el proyecto. Ofrece una topografía ideal para la construcción y vistas panorámicas del bosque nativo circundante.`,
-      image: `https://picsum.photos/seed/${id * 100}/600/400`,
-      coordinates: lotCoordinates[i]
-    };
-  });
-};
-
-const lotsData = generateLots();
-
 const Lotes: React.FC = () => {
+  const { lots } = useLots(); // Consuming dynamic data from context
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
   
   // Lógica de carga de imágenes en cascada
-  // 1. Intenta JPG local -> 2. Intenta PNG local -> 3. Usa imagen remota de respaldo
   const [imgSrc, setImgSrc] = useState('/plano-topografico.jpg');
   const [loadStep, setLoadStep] = useState(0);
 
   const handleImageError = () => {
     if (loadStep === 0) {
-      // Si falla JPG, intenta PNG
       setImgSrc('/plano-topografico.png');
       setLoadStep(1);
     } else if (loadStep === 1) {
-      // Si falla PNG, usa imagen de Unsplash de respaldo (Plano arquitectónico)
       setImgSrc('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=2940&auto=format&fit=crop');
       setLoadStep(2);
     }
@@ -144,20 +120,24 @@ const Lotes: React.FC = () => {
             </div>
 
             {/* Interactive Pins */}
-            {lotsData.map((lot) => (
-              <button
-                key={lot.id}
-                onClick={() => setSelectedLot(lot)}
-                className={`absolute w-8 h-8 md:w-10 md:h-10 -ml-4 -mt-4 rounded-full flex items-center justify-center text-xs md:text-sm font-bold transition-all duration-300 z-10 shadow-lg ${getStatusColor(lot.status)}`}
-                style={{ 
-                  top: `${lot.coordinates?.top}%`, 
-                  left: `${lot.coordinates?.left}%` 
-                }}
-                aria-label={`Ver detalles del Lote ${lot.id}`}
-              >
-                {lot.id}
-              </button>
-            ))}
+            {lots.map((lot, index) => {
+               // Use index safely to get coordinates. Ensure we don't go out of bounds if lots > coords
+               const coords = lotCoordinates[index] || { top: 50, left: 50 };
+               return (
+                <button
+                  key={lot.id}
+                  onClick={() => setSelectedLot(lot)}
+                  className={`absolute w-8 h-8 md:w-10 md:h-10 -ml-4 -mt-4 rounded-full flex items-center justify-center text-xs md:text-sm font-bold transition-all duration-300 z-10 shadow-lg ${getStatusColor(lot.status)}`}
+                  style={{ 
+                    top: `${coords.top}%`, 
+                    left: `${coords.left}%` 
+                  }}
+                  aria-label={`Ver detalles del Lote ${lot.id}`}
+                >
+                  {lot.id}
+                </button>
+               );
+            })}
           </div>
           <p className="text-center text-sm text-stone-400 mt-4 flex items-center justify-center gap-2">
             <MapPin className="h-4 w-4" />
