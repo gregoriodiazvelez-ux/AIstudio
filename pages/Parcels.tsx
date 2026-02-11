@@ -32,7 +32,7 @@ const Lotes: React.FC = () => {
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
   
   // Imagen por defecto del plano topográfico
-  const [imgSrc, setImgSrc] = useState('/Actual Map.jpg');
+  const [imgSrc, setImgSrc] = useState('/ChatGPT Image Feb 10, 2026, 07_20_45 PM.png');
   const [imgError, setImgError] = useState(false);
 
   const handleImageError = () => {
@@ -40,7 +40,7 @@ const Lotes: React.FC = () => {
     if (!imgError) {
       setImgError(true);
       // Usamos una imagen de mapa topográfico similar como fallback
-      setImgSrc('/Actual Map.jpg');
+      setImgSrc('/ChatGPT Image Feb 10, 2026, 07_20_45 PM.png');
     }
   };
 
