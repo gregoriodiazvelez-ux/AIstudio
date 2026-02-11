@@ -27,10 +27,10 @@ const Layout: React.FC = () => {
 
   // Dynamic Navbar Styles
   // Scrolled state is now semi-transparent dark gray (glassmorphism)
-  // Changed from bg-stone-900/85 to bg-stone-900/70 for more transparency
+  // Changed from bg-stone-900/70 to bg-stone-900/40 for even more transparency
   const navBackgroundClass = isTransparentPage && !isScrolled 
     ? 'bg-transparent border-transparent' 
-    : 'bg-stone-900/70 backdrop-blur-md border-b border-white/10 shadow-lg';
+    : 'bg-stone-900/40 backdrop-blur-md border-b border-white/10 shadow-lg';
 
   const navTextClass = isTransparentPage && !isScrolled 
     ? 'text-white hover:text-forest-200' 
