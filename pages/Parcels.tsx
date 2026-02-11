@@ -33,7 +33,7 @@ const Lotes: React.FC = () => {
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
   
   // Imagen por defecto del plano topográfico
-  const [imgSrc, setImgSrc] = useState('/plano-topografico.png');
+  const [imgSrc, setImgSrc] = useState('public/ChatGPT Image Feb 10, 2026, 07_20_45 PM.png');
   const [imgError, setImgError] = useState(false);
 
   // Statistics Calculation
