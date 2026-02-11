@@ -32,7 +32,7 @@ const Lotes: React.FC = () => {
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
   
   // Imagen por defecto del plano topográfico
-  const [imgSrc, setImgSrc] = useState('/plano-topografico.png');
+  const [imgSrc, setImgSrc] = useState('/Actual Map.jpg');
   const [imgError, setImgError] = useState(false);
 
   const handleImageError = () => {
