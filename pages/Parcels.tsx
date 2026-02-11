@@ -40,7 +40,7 @@ const Lotes: React.FC = () => {
     if (!imgError) {
       setImgError(true);
       // Usamos una imagen de mapa topográfico similar como fallback
-      setImgSrc('https://upload.wikimedia.org/wikipedia/commons/e/ec/Topographic_map_example.png');
+      setImgSrc('/Actual Map.jpg');
     }
   };
 
