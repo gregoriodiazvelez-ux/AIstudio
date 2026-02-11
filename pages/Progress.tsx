@@ -18,18 +18,28 @@ const Progress: React.FC = () => {
 
   return (
     <div className="bg-stone-50 min-h-screen pb-20">
-      {/* Header */}
-      <div className="bg-white border-b border-stone-200 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-stone-900 mb-4">Avance de Obra</h1>
-          <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-            Mantente actualizado con el desarrollo de Lotes El Retiro. Haz clic en cada etapa para ver la galería fotográfica.
+      {/* Hero Section */}
+      <section className="relative h-[50vh] flex items-center justify-center overflow-hidden mb-12">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1437482078695-73f5ca6c96e2?q=80&w=2670&auto=format&fit=crop" 
+            alt="River in nature" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-stone-900/40 backdrop-blur-[2px]" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold mb-4 tracking-wide animate-fade-in-up">
+            Avance de Obra
+          </h1>
+          <p className="max-w-2xl mx-auto text-lg md:text-xl font-light text-stone-100 animate-fade-in-up delay-100">
+             Mantente actualizado con el desarrollo de Gaia. Haz clic en cada etapa para ver la galería fotográfica.
           </p>
         </div>
-      </div>
+      </section>
 
       {/* List of Progress Items */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="space-y-12">
           {progressUpdates.map((update) => (
             <div 

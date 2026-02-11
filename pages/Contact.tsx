@@ -13,12 +13,22 @@ const Contact: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
+    
+    // Construct Mailto Link
+    // This opens the default email client with the message pre-filled
+    const subject = `Nuevo mensaje de contacto de ${formState.name}`;
+    const body = `Nombre: ${formState.name}\nEmail: ${formState.email}\n\nMensaje:\n${formState.message}`;
+    const mailtoLink = `mailto:gregoriodiazvelez2@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    // Trigger the email client
+    window.location.href = mailtoLink;
+    
+    // Show success message in UI
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
       setFormState({ name: '', email: '', message: '' });
-    }, 1500);
+    }, 1000);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -124,8 +134,8 @@ const Contact: React.FC = () => {
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
                     <Send className="h-8 w-8 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-stone-900 mb-2">¡Mensaje Enviado!</h3>
-                <p className="text-stone-600 mb-6">Gracias por contactarnos. Te responderemos a la brevedad.</p>
+                <h3 className="text-2xl font-bold text-stone-900 mb-2">¡Mensaje Preparado!</h3>
+                <p className="text-stone-600 mb-6">Se ha abierto tu aplicación de correo para enviar el mensaje a gregoriodiazvelez2@gmail.com</p>
                 <button 
                   onClick={() => setSubmitted(false)}
                   className="px-6 py-2 bg-stone-100 text-stone-700 rounded-lg hover:bg-stone-200 transition-colors"
@@ -186,8 +196,11 @@ const Contact: React.FC = () => {
                       : 'bg-forest-600 hover:bg-forest-700 hover:shadow-forest-600/30'
                   }`}
                 >
-                  {isSubmitting ? 'Enviando...' : 'Enviar Mensaje'}
+                  {isSubmitting ? 'Abriendo Correo...' : 'Enviar Mensaje'}
                 </button>
+                <p className="text-xs text-center text-stone-400 mt-2">
+                  Esto abrirá tu cliente de correo predeterminado.
+                </p>
               </form>
             )}
           </div>

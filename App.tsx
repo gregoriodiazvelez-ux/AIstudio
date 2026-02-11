@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Progress from './pages/Progress';
 import Lotes from './pages/Parcels';
 import Contact from './pages/Contact';
+import WhyGaia from './pages/WhyGaia';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
 import { LotProvider } from './context/LotContext';
@@ -26,6 +27,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="why-gaia" element={<WhyGaia />} />
             <Route path="progress" element={<Progress />} />
             <Route path="lotes" element={<Lotes />} />
             <Route path="contact" element={<Contact />} />
