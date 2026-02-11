@@ -7,41 +7,40 @@ import { X, ZoomIn, MapPin, Image as ImageIcon } from 'lucide-react';
  * ==========================================
  * CONFIGURACIÓN DE COORDENADAS
  * ==========================================
- * Estas coordenadas se mantienen fijas porque dependen de la imagen del mapa.
+ * Coordenadas ajustadas al plano topográfico.
  */
 const lotCoordinates = [
-  { top: 40, left: 56 }, // Lote 1 (Centro-Derecha, marcado en mapa)
-  { top: 53, left: 35 }, // Lote 2 (Centro-Izquierda, marcado en mapa)
-  { top: 33, left: 42 }, // Lote 3 (Arriba-Centro, marcado en mapa)
-  { top: 63, left: 46 }, // Lote 4 (Abajo-Centro, marcado en mapa)
-  { top: 18, left: 64 }, // Lote 5 (Sector Nororiental superior)
-  { top: 15, left: 80 }, // Lote 6 (Extremo Nororiental)
-  { top: 35, left: 75 }, // Lote 7 (Sector Oriental medio)
-  { top: 45, left: 85 }, // Lote 8 (Borde Oriental)
-  { top: 55, left: 65 }, // Lote 9 (Sector Suroriental interior)
-  { top: 65, left: 80 }, // Lote 10 (Sector Suroriental medio)
-  { top: 80, left: 75 }, // Lote 11 (Extremo Suroriental)
-  { top: 75, left: 35 }, // Lote 12 (Sector Suroccidental)
-  { top: 85, left: 50 }, // Lote 13 (Borde Sur)
-  { top: 28, left: 25 }, // Lote 14 (Corredor Occidental - "Cuello")
-  { top: 18, left: 10 }, // Lote 15 (Extremo Occidental - "Cabeza")
+  { top: 40, left: 56 }, // Lote 1
+  { top: 53, left: 35 }, // Lote 2
+  { top: 33, left: 42 }, // Lote 3
+  { top: 63, left: 46 }, // Lote 4
+  { top: 18, left: 64 }, // Lote 5
+  { top: 15, left: 80 }, // Lote 6
+  { top: 35, left: 75 }, // Lote 7
+  { top: 45, left: 85 }, // Lote 8
+  { top: 55, left: 65 }, // Lote 9
+  { top: 65, left: 80 }, // Lote 10
+  { top: 80, left: 75 }, // Lote 11
+  { top: 75, left: 35 }, // Lote 12
+  { top: 85, left: 50 }, // Lote 13
+  { top: 28, left: 25 }, // Lote 14
+  { top: 18, left: 10 }, // Lote 15
 ];
 
 const Lotes: React.FC = () => {
-  const { lots } = useLots(); // Consuming dynamic data from context
+  const { lots } = useLots();
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
   
-  // Lógica de carga de imágenes en cascada
-  const [imgSrc, setImgSrc] = useState('/Actual Map.jpg');
-  const [loadStep, setLoadStep] = useState(0);
+  // Imagen por defecto del plano topográfico
+  const [imgSrc, setImgSrc] = useState('/plano-topografico.png');
+  const [imgError, setImgError] = useState(false);
 
   const handleImageError = () => {
-    if (loadStep === 0) {
-      setImgSrc('/plano-topografico.png');
-      setLoadStep(1);
-    } else if (loadStep === 1) {
-      setImgSrc('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=2940&auto=format&fit=crop');
-      setLoadStep(2);
+    // Si falla la imagen local, usar una imagen externa de alta calidad como respaldo
+    if (!imgError) {
+      setImgError(true);
+      // Usamos una imagen de mapa topográfico similar como fallback
+      setImgSrc('https://upload.wikimedia.org/wikipedia/commons/e/ec/Topographic_map_example.png');
     }
   };
 
@@ -94,20 +93,24 @@ const Lotes: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
         <div className="bg-white p-4 rounded-3xl shadow-xl border border-stone-100">
           
-          {/* Map Container */}
-          <div className="relative w-full aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden bg-stone-100 group">
+          {/* 
+            Map Container 
+            REMOVED: aspect-ratio classes to allow image to dictate height.
+            CHANGED: 'relative' container with 'w-full'.
+          */}
+          <div className="relative w-full rounded-2xl overflow-hidden bg-stone-50 group">
             
             <img 
               src={imgSrc}
               onError={handleImageError}
               alt="Plano del Proyecto" 
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              className="w-full h-auto object-contain block" 
             />
             
             {/* Aviso si se está usando la imagen de respaldo */}
-            {loadStep === 2 && (
+            {imgError && (
               <div className="absolute bottom-4 right-4 bg-white/80 backdrop-blur px-3 py-1 rounded text-xs text-stone-500 border border-stone-200 shadow-sm z-20">
-                Mostrando plano de ejemplo (Agrega 'plano-topografico.jpg' en public/)
+                Usando mapa de ejemplo (Sube tu archivo como 'plano-topografico.png' en public/)
               </div>
             )}
 
@@ -121,7 +124,7 @@ const Lotes: React.FC = () => {
 
             {/* Interactive Pins */}
             {lots.map((lot, index) => {
-               // Use index safely to get coordinates. Ensure we don't go out of bounds if lots > coords
+               // Use index safely to get coordinates.
                const coords = lotCoordinates[index] || { top: 50, left: 50 };
                return (
                 <button

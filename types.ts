@@ -21,4 +21,5 @@ export interface ProgressUpdate {
   percentage: number;
   date: string;
   status: 'Completado' | 'En Progreso' | 'Próximamente';
+  images: string[]; // Array of image URLs for the gallery
 }
