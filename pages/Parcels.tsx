@@ -7,24 +7,25 @@ import { X, ZoomIn, MapPin, ChevronRight, Info, TrendingUp } from 'lucide-react'
  * ==========================================
  * CONFIGURACIÓN DE COORDENADAS
  * ==========================================
- * Coordenadas ajustadas al plano topográfico.
+ * Coordenadas ajustadas al plano topográfico visual.
+ * Basado en la distribución de 15 lotes en el mapa wireframe.
  */
 const lotCoordinates = [
-  { top: 40, left: 56 }, // Lote 1
-  { top: 53, left: 35 }, // Lote 2
-  { top: 33, left: 42 }, // Lote 3
-  { top: 63, left: 46 }, // Lote 4
-  { top: 18, left: 64 }, // Lote 5
-  { top: 15, left: 80 }, // Lote 6
-  { top: 35, left: 75 }, // Lote 7
-  { top: 45, left: 85 }, // Lote 8
-  { top: 55, left: 65 }, // Lote 9
-  { top: 65, left: 80 }, // Lote 10
-  { top: 80, left: 75 }, // Lote 11
-  { top: 75, left: 35 }, // Lote 12
-  { top: 85, left: 50 }, // Lote 13
-  { top: 28, left: 25 }, // Lote 14
-  { top: 18, left: 10 }, // Lote 15
+  { top: 15, left: 9 },   // Lote 1: Extremo Izquierdo Superior
+  { top: 28, left: 11 },  // Lote 2: Extremo Izquierdo Inferior
+  { top: 15, left: 20 },  // Lote 3: Izquierda Interior Superior
+  { top: 22, left: 32 },  // Lote 4: El "Puente" o Cuello
+  { top: 32, left: 46 },  // Lote 5: Centro Superior
+  { top: 18, left: 60 },  // Lote 6: Superior Derecha (Alto)
+  { top: 18, left: 75 },  // Lote 7: Esquina Superior Derecha
+  { top: 38, left: 66 },  // Lote 8: Centro Derecha (Bajo el 6)
+  { top: 45, left: 85 },  // Lote 9: Punta Extrema Derecha
+  { top: 60, left: 45 },  // Lote 10: Grande Vertical Izquierda (Abajo del camino)
+  { top: 55, left: 58 },  // Lote 11: Centro (Abajo del camino)
+  { top: 52, left: 75 },  // Lote 12: Derecha Media (Bajo el 7)
+  { top: 72, left: 80 },  // Lote 13: Esquina Inferior Derecha
+  { top: 82, left: 68 },  // Lote 14: Borde Inferior Derecha
+  { top: 78, left: 55 },  // Lote 15: Borde Inferior Centro
 ];
 
 const Lotes: React.FC = () => {
@@ -32,7 +33,7 @@ const Lotes: React.FC = () => {
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
   
   // Imagen por defecto del plano topográfico
-  const [imgSrc, setImgSrc] = useState('/ChatGPT Image Feb 10, 2026, 07_20_45 PM.png');
+  const [imgSrc, setImgSrc] = useState('/plano-topografico.png');
   const [imgError, setImgError] = useState(false);
 
   // Statistics Calculation

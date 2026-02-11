@@ -19,10 +19,21 @@ const generateInitialLots = (): Lot[] => {
     if ([2, 5, 8, 12].includes(id)) status = LotStatus.SOLD;
     if ([3, 7, 14].includes(id)) status = LotStatus.RESERVED;
 
+    // Generate random size between 5000 and 5500 m²
+    const sizeVal = Math.floor(Math.random() * (5500 - 5000 + 1)) + 5000;
+    
+    // Calculate price based on 110,000 COP per m²
+    const pricePerSqM = 110000;
+    const priceVal = sizeVal * pricePerSqM;
+
+    // Format using Colombian locale conventions
+    const fmtSize = new Intl.NumberFormat('es-CO').format(sizeVal);
+    const fmtPrice = new Intl.NumberFormat('es-CO').format(priceVal);
+
     return {
       id,
-      size: `${2000 + (id * 50)} m²`,
-      price: status === LotStatus.SOLD ? 'Vendido' : `$${350 + (id * 10)} Millones COP`,
+      size: `${fmtSize} m²`,
+      price: status === LotStatus.SOLD ? 'Vendido' : `$${fmtPrice} COP`,
       status,
       description: `El Lote ${id} cuenta con una ubicación privilegiada en el proyecto. Ofrece una topografía ideal para la construcción y vistas panorámicas del bosque nativo circundante.`,
       image: `https://picsum.photos/seed/${id * 100}/600/400`,
@@ -95,9 +106,9 @@ const generateInitialProgress = (): ProgressUpdate[] => [
 ];
 
 export const LotProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Lots State
+  // Lots State - Key updated to 'v2' to force refresh of data with new price logic
   const [lots, setLots] = useState<Lot[]>(() => {
-    const saved = localStorage.getItem('el-retiro-lots-data');
+    const saved = localStorage.getItem('el-retiro-lots-data-v2');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { console.error(e); }
     }
@@ -115,7 +126,7 @@ export const LotProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
   // Persistence
   useEffect(() => {
-    localStorage.setItem('el-retiro-lots-data', JSON.stringify(lots));
+    localStorage.setItem('el-retiro-lots-data-v2', JSON.stringify(lots));
   }, [lots]);
 
   useEffect(() => {

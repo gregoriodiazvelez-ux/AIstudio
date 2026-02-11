@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Leaf, Map, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Leaf, Map, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 const Home: React.FC = () => {
   // State to manage image sources with fallbacks
@@ -62,30 +62,88 @@ const Home: React.FC = () => {
       {/* Features Section */}
       <section className="py-24 bg-stone-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            
+            {/* Feature 1: Vida Ecológica */}
             <div className="p-8 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-forest-50 mb-6 text-forest-600">
-                <Leaf className="h-8 w-8" />
+              <div className="flex flex-col items-center text-center mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-forest-50 mb-6 text-forest-600">
+                  <Leaf className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-display font-semibold text-stone-900">Vida Ecológica</h3>
               </div>
-              <h3 className="text-xl font-display font-semibold text-stone-900 mb-3">Vida Ecológica</h3>
-              <p className="text-stone-600">Diseñado respetando el medio ambiente, con zonas verdes protegidas e infraestructura sostenible.</p>
+              <ul className="space-y-4 text-stone-600 text-sm">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-forest-500 flex-shrink-0 mt-0.5" />
+                  <span>Vías amplias en afirmado con desagüe.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-forest-500 flex-shrink-0 mt-0.5" />
+                  <span>Iluminación de carga solar en zonas comunes.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-forest-500 flex-shrink-0 mt-0.5" />
+                  <span>Acceso a acueducto y energía a borde de lote.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-forest-500 flex-shrink-0 mt-0.5" />
+                  <span className="font-medium text-forest-700">Todos los lotes se entregan con explanación.</span>
+                </li>
+              </ul>
             </div>
+
+            {/* Feature 2: Ubicación */}
             <div className="p-8 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-earth-100 mb-6 text-earth-600">
-                <Map className="h-8 w-8" />
+              <div className="flex flex-col items-center text-center mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-earth-100 mb-6 text-earth-600">
+                  <Map className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-display font-semibold text-stone-900">Ubicación Privilegiada</h3>
               </div>
-              <h3 className="text-xl font-display font-semibold text-stone-900 mb-3">Ubicación Privilegiada</h3>
-              <p className="text-stone-600 leading-relaxed">
-                Estamos en todo el centro entre La Ceja y El Retiro, aproximadamente a 18 minutos del parque de El Retiro y 20 minutos del parque de La Ceja, sobre la vereda La Amapola vecina de la vereda Pantanillo.
-              </p>
+              <ul className="space-y-4 text-stone-600 text-sm">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-earth-500 flex-shrink-0 mt-0.5" />
+                  <span>Punto estratégico entre La Ceja y El Retiro.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-earth-500 flex-shrink-0 mt-0.5" />
+                  <span>A 18 minutos del parque de El Retiro.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-earth-500 flex-shrink-0 mt-0.5" />
+                  <span>A 20 minutos del parque de La Ceja.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-earth-500 flex-shrink-0 mt-0.5" />
+                  <span>Sobre la vereda La Amapola, vecina de Pantanillo.</span>
+                </li>
+              </ul>
             </div>
+
+            {/* Feature 3: Seguridad */}
             <div className="p-8 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-forest-50 mb-6 text-forest-600">
-                <ShieldCheck className="h-8 w-8" />
+              <div className="flex flex-col items-center text-center mb-6">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-forest-50 mb-6 text-forest-600">
+                  <ShieldCheck className="h-8 w-8" />
+                </div>
+                <h3 className="text-xl font-display font-semibold text-stone-900">Seguridad y Privacidad</h3>
               </div>
-              <h3 className="text-xl font-display font-semibold text-stone-900 mb-3">Seguridad y Privacidad</h3>
-              <p className="text-stone-600">Una comunidad cerrada que garantiza privacidad y seguridad para ti y tu familia.</p>
+              <ul className="space-y-4 text-stone-600 text-sm">
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-forest-500 flex-shrink-0 mt-0.5" />
+                  <span>Comunidad cerrada que garantiza privacidad.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-forest-500 flex-shrink-0 mt-0.5" />
+                  <span>Acceso controlado y monitoreo inteligente.</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle2 className="h-5 w-5 text-forest-500 flex-shrink-0 mt-0.5" />
+                  <span className="font-medium text-forest-700">Todos los propietarios tendrán acceso a la app de monitoreo de cámaras.</span>
+                </li>
+              </ul>
             </div>
+
           </div>
         </div>
       </section>
